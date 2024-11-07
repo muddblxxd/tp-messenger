@@ -49,7 +49,7 @@ def crea(serv) :
 def creag(serv) :
     nom = input('Quel est le nom de ton groupe ? ')
     t=len(server['channels'])+1
-    c=''
+    c='g'
     while c != 'Non':
         n = input(' Quel est le nom du nouveau membre du groupe ? ')
         server['channels'].append({'id' : t, 'name' : nom, 'member_ids' : []})

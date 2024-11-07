@@ -1,0 +1,18 @@
+{
+    "users": [
+        {"id": 1, "name": "Lise"},
+        {"id": 2, "name": "bgdu65"}
+    ],
+    "channels": [
+        {"id": 1, "name": "Groupe 5 info", "member_ids": [1, 2]}
+    ],
+    "messages": [
+        {
+            "id": 1,
+            "reception_date": "d",
+            "sender_id": 1,
+            "channel": 1,
+            "content": "Hi 👋"
+        }
+    ]
+}
