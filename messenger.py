@@ -1,23 +1,12 @@
 from datetime import datetime
+import json 
 
-server = {
-    'users': [
-        {'id': 1, 'name': 'Lise'},
-        {'id': 2, 'name': 'bgdu65'}
-    ],
-    'channels': [
-        {'id': 1, 'name': 'Groupe 5 info', 'member_ids': [1, 2]}
-    ],
-    'messages': [
-        {
-            'id': 1,
-            'reception_date': datetime.now(),
-            'sender_id': 1,
-            'channel': 1,
-            'content': 'Hi 👋'
-        }
-    ]
-}
+with open('serverdata.json') as file :
+    server = json.load(file)
+
+#name=[]
+# for user in server['user'] :
+#     name.append(user['name'])
 
 def users(serv) :
     print(' ---- Listes des copains ----')
@@ -37,8 +26,13 @@ def channels(serv) :
     for p in range(m) :
         print(server['channels'][p]['name'])
         print('')
-
+    print('h. Afficher les membres d un groupes')
     print('m. Retour au menu')
+
+def aff(serv) :
+    name=input('Quelle groupe ? ')
+    
+    
 
 def crea(serv) :
     nom = input('Quel est ton jolie petit nom ? ')
@@ -50,13 +44,14 @@ def creag(serv) :
     nom = input('Quel est le nom de ton groupe ? ')
     t=len(server['channels'])+1
     c='g'
+    l=[]
     while c != 'Non':
-        n = input(' Quel est le nom du nouveau membre du groupe ? ')
-        server['channels'].append({'id' : t, 'name' : nom, 'member_ids' : []})
-        k=1
-        while server['users'][k]['name'] != n :
-            k=k+1
-            server['channels'][t]['name'][nom]['member_ids'] = k
+        n = input('Quel est le nom du nouveau membre du groupe ? ')
+        p=0
+        while server['users'][p]['name'] != n :
+            p=p+1
+        l.append(p+1)    
+        server['channels'].append({'id' : t, 'name' : nom, 'member_ids' : l })
         c = input('Voulez vous ajouter d autres membres ?')
     menu(server)
 
@@ -69,6 +64,10 @@ def menu(serv) :
     print('g. Créer un nouveau groupe')
     print('x. Quitter l appli')
 
+def sauv(serv) :
+    with open('serverdata.json', "w") as file :
+            json.dump(server, file)
+
 choice = ''
 menu(server)
 while choice != 'x' :
@@ -80,11 +79,14 @@ while choice != 'x' :
     elif choice == 'n' :
         crea(server)
     elif choice == 'x':
+        sauv(server)
         print('Bye!')
     elif choice == 'm':
         menu(server)
     elif choice == 'g' :
         creag(server)
+    elif choice == 'h' :
+        aff(server)
     else : 
         print('Unknown option:', choice)
 
