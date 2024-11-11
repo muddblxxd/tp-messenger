@@ -11,9 +11,9 @@ with open('serverdata.json') as file :
 def users(serv) :
     print(' ---- Listes des copains ----')
     print('')
-    n = len(server['users'])
+    n = len(serv['users'])
     for k in range(n) :
-        print(server['users'][k]['id'],server['users'][k]['name'])
+        print(serv['users'][k]['id'],serv['users'][k]['name'])
     print('')
     print('n. Créer ton id')
     print('m. Retour au menu')
@@ -22,9 +22,9 @@ def users(serv) :
 def channels(serv) :
     print(' ~~~~~ Nom du groupe ~~~~~')
     print('')
-    m = len(server['channels'])
+    m = len(serv['channels'])
     for p in range(m) :
-        print(server['channels'][p]['name'])
+        print(serv['channels'][p]['name'])
         print('')
     print('h. Afficher les membres d un groupes')
     print('m. Retour au menu')
@@ -36,24 +36,24 @@ def aff(serv) :
 
 def crea(serv) :
     nom = input('Quel est ton jolie petit nom ? ')
-    k = len(server['users'])+1
-    server['users'].append({'id': k, 'name' : nom})
-    menu(server)
+    k = len(serv['users'])+1
+    serv['users'].append({'id': k, 'name' : nom})
+    menu(serv)
 
 def creag(serv) :
     nom = input('Quel est le nom de ton groupe ? ')
-    t=len(server['channels'])+1
+    t=len(serv['channels'])+1
     c='g'
     l=[]
     while c != 'Non':
         n = input('Quel est le nom du nouveau membre du groupe ? ')
         p=0
-        while server['users'][p]['name'] != n :
+        while serv['users'][p]['name'] != n :
             p=p+1
         l.append(p+1)    
-        server['channels'].append({'id' : t, 'name' : nom, 'member_ids' : l })
+        serv['channels'].append({'id' : t, 'name' : nom, 'member_ids' : l })
         c = input('Voulez vous ajouter d autres membres ?')
-    menu(server)
+    menu(serv)
 
 def menu(serv) :
     print('=== Messenger ===')
@@ -66,7 +66,7 @@ def menu(serv) :
 
 def sauv(serv) :
     with open('serverdata.json', "w") as file :
-            json.dump(server, file)
+            json.dump(serv, file)
 
 choice = ''
 menu(server)
