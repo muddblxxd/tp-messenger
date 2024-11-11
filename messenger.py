@@ -17,6 +17,15 @@ def users(serv) :
     print('')
     print('n. Créer ton id')
     print('m. Retour au menu')
+    choice = input('Faites un choix ! : ')
+    if choice == 'n' :
+        return crea(server)
+    elif choice == 'm':
+        return menu(server)
+    else:
+        print('Choix inconnu :(')
+        return users(serv)
+
     
         
 def channels(serv) :
@@ -28,6 +37,14 @@ def channels(serv) :
         print('')
     print('h. Afficher les membres d un groupes')
     print('m. Retour au menu')
+    choice = input('Faites un choix ! : ')
+    if choice == 'h' :
+        return aff(server)
+    elif choice == 'm':
+        return menu(server)
+    else:
+        print('Choix inconnu :(')
+        return channels(serv)
 
 def aff(serv) :
     name=input('Quelle groupe ? ')
@@ -63,31 +80,25 @@ def menu(serv) :
     print('n. Créer ton id')
     print('g. Créer un nouveau groupe')
     print('x. Quitter l appli')
+    choice = input('Faites un choix ! : ')
+    if choice == '1':
+        return users(server)
+    elif choice == '2':
+        return channels(server)
+    elif choice == 'n' :
+        return crea(server)
+    elif choice == 'x':
+        sauv(server)
+        print('Bye!')
+        return
+    elif choice == 'g' :
+        return creag(server)
+    else : 
+        print('Unknown option:', choice)
+        return menu(serv)
 
 def sauv(serv) :
     with open('serverdata.json', "w") as file :
             json.dump(serv, file)
 
-choice = ''
 menu(server)
-while choice != 'x' :
-    choice = input('Faites un choix ! : ')
-    if choice == '1':
-        users(server)
-    elif choice == '2':
-        channels(server)
-    elif choice == 'n' :
-        crea(server)
-    elif choice == 'x':
-        sauv(server)
-        print('Bye!')
-    elif choice == 'm':
-        menu(server)
-    elif choice == 'g' :
-        creag(server)
-    elif choice == 'h' :
-        aff(server)
-    else : 
-        print('Unknown option:', choice)
-
-
