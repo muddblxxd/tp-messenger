@@ -1,12 +1,29 @@
 from datetime import datetime
 import json 
 
-with open('serverdata.json') as file :
-    server = json.load(file)
+# with open('serverdata.json') as file :
+#     server = json.load(file)
 
-#name=[]
-# for user in server['user'] :
-#     name.append(user['name'])
+SERVER_FILE_NAME = 'serverdata.json'
+def load_server():
+    with open(SERVER_FILE_NAME) as json_file :
+        serv= json.load(json_file)
+
+serv = load_server()
+
+def save_server(server_to_save : dict):
+    json.dump(server_to_save, open(SERVER_FILE_NAME, 'w'))
+
+class User :
+    def __init__(self, id: int, name: str)
+        self.id = id
+        self.name = name
+
+class Channel :
+    def __init__(self,id: int, name:str, member_ids: list) :
+        self.id = id
+        self.name = name
+        self.member_ids = member_ids
 
 def users(serv) :
     print(' ---- Listes des copains ----')
@@ -19,9 +36,9 @@ def users(serv) :
     print('m. Retour au menu')
     choice = input('Faites un choix ! : ')
     if choice == 'n' :
-        return crea(server)
+        return crea(serv)
     elif choice == 'm':
-        return menu(server)
+        return menu(serv)
     else:
         print('Choix inconnu :(')
         return users(serv)
@@ -37,14 +54,14 @@ def channels(serv) :
     print('m. Retour au menu')
     choice = input('Faites un choix ! : ')
     if choice == 'h' :
-        return aff(server)
+        return affichage(serv)
     elif choice == 'm':
-        return menu(server)
+        return menu(serv)
     else:
         print('Choix inconnu :(')
         return channels(serv)
 
-def aff(serv) :
+def affichage(serv) :
     name=input('Quelle groupe ? ')
     
 def crea(serv) :
@@ -78,17 +95,17 @@ def menu(serv) :
     print('x. Quitter l appli')
     choice = input('Faites un choix ! : ')
     if choice == '1':
-        return users(server)
+        return users(serv)
     elif choice == '2':
-        return channels(server)
+        return channels(serv)
     elif choice == 'n' :
-        return crea(server)
+        return crea(serv)
     elif choice == 'x':
-        sauv(server)
+        sauv(serv)
         print('Bye!')
         return
     elif choice == 'g' :
-        return creag(server)
+        return creag(serv)
     else : 
         print('Unknown option:', choice)
         return menu(serv)
@@ -97,4 +114,4 @@ def sauv(serv) :
     with open('serverdata.json', "w") as file :
             json.dump(serv, file)
 
-menu(server)
+menu(serv)
