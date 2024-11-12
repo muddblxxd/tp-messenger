@@ -25,9 +25,7 @@ def users(serv) :
     else:
         print('Choix inconnu :(')
         return users(serv)
-
-    
-        
+  
 def channels(serv) :
     print(' ~~~~~ Nom du groupe ~~~~~')
     print('')
@@ -49,8 +47,6 @@ def channels(serv) :
 def aff(serv) :
     name=input('Quelle groupe ? ')
     
-    
-
 def crea(serv) :
     nom = input('Quel est ton jolie petit nom ? ')
     k = len(serv['users'])+1
