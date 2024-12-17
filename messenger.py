@@ -69,10 +69,21 @@ server1 = { "users": [
         }
     ]}
 
+import sys
+print(sys.argv)
 
+import argparse
+SERVER_FILE_NAME = ''
+parser = argparse.ArgumentParser()
+parser.add_argument('-osk')
+
+args = parser.parse_args()
+
+print('ArgumentParser a parsé le parametre suivant :', args.osk)
+SERVER_FILE_NAME = args.osk
 
 import json
-SERVER_FILE_NAME = 'serverdata.json'
+
 
 with open(SERVER_FILE_NAME) as fichier:
     server = json.load(fichier)
