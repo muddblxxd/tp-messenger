@@ -101,12 +101,12 @@ def connexion():
     print('')
     choice = input('Enter a choice and press <Enter>:')
     if choice == 'c':
-        mon_id = int(input('What is your id? :'))
+        mon_id = int(input('Id? :'))
     elif choice == 'i':
-        name = input('What is your name ?')
+        name = input('Ton joli nom ?')
         mon_id = max([user.id for user in server.users]) + 1
         server.users.append(User(mon_id, name))
-        print('your id is', mon_id)
+        print('ton id c', mon_id)
     else:
         print('Unknown option', choice)
         return connexion()
@@ -115,7 +115,7 @@ def connexion():
 def choix_users(mon_id):
     choice = input('Enter a choice and press <Enter>:')
     if choice == 'n':
-        name = input('Choose a name :')
+        name = input('Choisir nom :')
         id = max([user.id for user in server.users]) + 1
         server.users.append(User(id, name))
         print('User list')
@@ -124,8 +124,8 @@ def choix_users(mon_id):
         for user in server.users:
             print(user.id,'.', user.name)
         print('')
-        print('n. Create user')
-        print('x. Main Menu')
+        print('n. Créer un compte')
+        print('x. Menu')
         print('')
         choix_users(mon_id)
     else :
@@ -167,8 +167,8 @@ def choix_message(mon_id, id_groupe):
                 reception_date=datetime.now()
                 server.messages.append(Message(id, reception_date, mon_id, id_groupe, content))
         print('')
-        print('s. send a message')
-        print('x. return to the channels')
+        print('s. envoyer msg')
+        print('x. retour')
         print('')
         choix_message(mon_id, id_groupe)
     else :
@@ -180,8 +180,8 @@ def choix_channels(mon_id):
     choice = input('Enter a choice and press <Enter>:')
     if choice == 'n':
         id = max([channel.id for channel in server.channels]) + 1
-        name = input('Choose a channel name :')
-        members_name = (input('Members list :'))
+        name = input('Nom groupe :')
+        members_name = (input('Liste amis :'))
         liste_members_name = members_name.split(',')
         liste_members_name_finale = []
         for e in liste_members_name:
@@ -195,50 +195,50 @@ def choix_channels(mon_id):
         for channel in server.channels:
             print(channel)
         print('')
-        print('n. Create channel')
-        print('a. Add a member')
-        print('m. See message')
-        print('x. Main Menu')
+        print('n. Créer groupe')
+        print('a. Ajouter amis')
+        print('m. Voir msg')
+        print('x. Menu')
         print('')
         choix_channels(mon_id)
     elif choice == 'x':
         choix_menu(mon_id)
     elif choice == 'a':
-        groupe_id = int(input('Which channel id ? :'))
+        groupe_id = int(input('Id groupe ? :'))
         print('')
-        print('User list')
+        print('Liste amis')
         print('---------')
         print('')
         for user in server.users:
             print(user.id,'.', user.name)
         print('')
-        member_id = int(input('Id of the member you want to add :'))
+        member_id = int(input('Id amis :'))
         for channel in server.channels:
             if channel.id == groupe_id:
                 channel.member_ids.append(member_id)
         for channel in server.channels:
             print(channel)
         print('')
-        print('n. Create channel')
-        print('a. Add a member')
-        print('x. Main Menu')
+        print('n. Créer un groupe')
+        print('a. Ajouter un membre')
+        print('x. Menu')
         print('')
         choix_channels(mon_id)
     elif choice == 'm':
-        id_groupe = int(input('Enter the id of the group :'))
+        id_groupe = int(input('Nom du groupe :'))
         choix_voir_message(mon_id, id_groupe)
     else :
-        print('Unknown option', choice)
+        print('Existe pas', choice)
         choix_channels(mon_id)
    
 
 def choix_menu(mon_id):
     print('=== Messenger ===')
     print('')
-    print('1. See users')
-    print('2. See channels')
+    print('1. Voir amis')
+    print('2. Voir groupe')
     print('')
-    print('x. Leave')
+    print('x. Quitter')
     print('')
     choice = input('Select an option: ')
     print('')
@@ -247,25 +247,25 @@ def choix_menu(mon_id):
         print('Bye !')
         return None
     elif choice == '1':
-        print('User list')
+        print('Liste amis')
         print('---------')
         print('')
         for user in server.users:
             print(user.id,'.', user.name)
         print('')
-        print('n. Create user')
-        print('x. Main Menu')
+        print('n. Créer un compte')
+        print('x. Menu')
         print('')
         choix_users(mon_id)
     elif choice == '2':
         afficher_channels(mon_id)
         choix_channels(mon_id)
     else:
-        print('Unknown option', choice)
+        print('Existe pas', choice)
         choix_menu(mon_id)
 
 def afficher_channels(mon_id):
-    print('Channels list')
+    print('Voir groupe')
     print('---------')
     print('')
     has_channel = False
@@ -280,16 +280,16 @@ def afficher_channels(mon_id):
             print(channel.id,'.', channel.name, ', membres :', [m for m in membres])
     if has_channel:
         print('')
-        print('n. Create channel')
-        print('a. Add a member')
-        print('m. See message')
-        print('x. Main Menu')
+        print('n. Créer un groupe')
+        print('a. Ajouter un membre')
+        print('m. Voir msg')
+        print('x. Menu')
         print('')
     else:
-        print('you do not have a channel yet')
+        print('Tapadamis')
         print('')
-        print('n. Create channel')
-        print('x. Main Menu')
+        print('n. Créer un groupe')
+        print('x. Menu')
         print('')
 
 
