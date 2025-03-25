@@ -1,5 +1,5 @@
 from datetime import datetime
-from server import server
+from server import *
 from model import *
 from remoteServer import *
 
@@ -18,11 +18,12 @@ class Client:
             mon_id = int(input('Id? :'))
         elif choice == 'i':
             name = input('Ton joli nom ?')
-            mon_id = max([user.id for user in self.server.users]) + 1
-            self.server.users.append(User(mon_id, name))
+            mon_id = max([user.id for user in self.server.users()]) + 1
+            self.server.add_user(name)
+
             print('ton id c', mon_id)
         else:
-            print('Unknown option', choice)
+            print('Existe pas', choice)
             return self.connexion(self)
         self.choix_menu(mon_id)
 
@@ -32,7 +33,7 @@ class Client:
             name = input('Choisir nom :')
             id = max([user.id for user in self.server.users]) + 1
             self.server.users.append(User(id, name))
-            print('User list')
+            print('Liste utilisateur23')
             print('---------')
             print('')
             for user in self.server.users:
