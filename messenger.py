@@ -10,19 +10,15 @@ argument_parser.add_argument('-f', '--filename')
 argument_parser.add_argument('-u', '--url')
 argument_parser.add_argument('-p', '--portail', action = 'store_true')
 arguments = argument_parser.parse_args()
-server : Server
+# Vous pouvez indiquer que votre variable `server` est soit
+# du type `Server`, soit du type `RemoteServer`
+server : Server | RemoteServer
 if arguments.filename is not None:
-    server = Server(arguments.filename)
+    server = Server.load_from_file(arguments.filename)
 elif arguments.url is not None:
     server = RemoteServer(arguments.url)
-
 
 
 client = Client(server)
 
 client.connexion()
-
-
-
-
-   
